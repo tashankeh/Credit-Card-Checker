@@ -25,11 +25,12 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 // Add your functions below:
 const validateCred = array => {
-  let parity = array.length % 2;
+  let parity = array.length % 2;//parity solved the problem of choosing the right digits to leave unchanged or multiplied by two.
   let sumDigit = 0;
   for (i = 0; i < array.length-1; i++) {
     let digit = array[i];
-    if (i % 2 === parity){
+    // To understand the code below notice that index of array that requires doubling must have same parity (odd or even) with the array length.
+    if (i % 2 === parity){ 
       digit = digit*2;
       if (digit > 9) {
         digit = digit - 9;
@@ -54,39 +55,29 @@ const idInvalidCardCompanies = invalidCards => {
   let companyName = ' ';
   let msg = ' ';
   
-  invalidCards.forEach(card => {
+   invalidCards.forEach(card => {
     let firstDigit = card[0];
     switch (firstDigit){
       case 3:
        // console.log(`test`);
         companyName = 'Annex (American Express)';
-        if (companies.includes(companyName) === false) {
-          companies.push(companyName);
-          //console.log(`${companies}`)
-        }
+
         break;//ncase 3
       case 4:
-      companyName = 'visa';
-       if (companies.includes(companyName)=== false) {
-          companies.push(companyName);
-       }
-      break;   
+        companyName = 'visa';
+        break;   
       case 5:
-      companyName = 'Mastercard';
-       if (companies.includes(companyName) === false) {
-          companies.push(companyName);
-       }
-      break; 
+        companyName = 'Mastercard';
+        break; 
       case 6:
-      companyName = 'Discover';
-       if (companies.includes(companyName) === false) {
-          companies.push(companyName);
-       }
-      break; 
+        companyName = 'Discover';
+        break; 
       default:
-      msg = 'Company Not Found'
-      console.log(msg);
-
+        msg = 'Company Not Found'
+        console.log(msg);
+    }
+    if (companies.includes(companyName) === false) {
+        companies.push(companyName);
     }
   } );
   return companies;
